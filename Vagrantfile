@@ -1,41 +1,21 @@
+
 Vagrant.configure("2") do |config|
 
-#  defaults = {}
-#  default = {
-#    "hostname" => "devstack-vxlan",
-#    "box_name" => "dummy",
-#    "box_url" => "https://github.com/cloudbau/vagrant-openstack-plugin/raw/master/dummy.box",
-#    "box_ssh_username" => "vagrant",
-#    "create_private_network" => true,
-#    "openstack" => {
-#      "username" => "davwah3",
-#      "api_key" => "wahls#13913118",
-#      "endpoint" => "https://keystone.dream.io/v2.0/tokens",
-#      "keypair_name" => "dwahlstrom",
-#      "ssh_username" => "dhc-user",
-#      "tenant" => "DrWahl.me",
-#      "networks" => ["private-network"]
-#    },
-#  }
-#
-#  config.nodes.each do |key, data|
-#    # Set some default values for configuration options
-#    defaults[key] = default
-#  end
-#  config.defaults = {"nodes" => defaults}
-#
-#  config.nodes.each do |key, data|
-#    config.vm.define key do |node|
+ $os_username = ENV['OS_USERNAME']
+ $os_password = ENV['OS_PASSWORD']
+ $os_tenant_name = ENV['OS_TENANT_NAME']
+ # OS_KEYPAIR_NAME is a non-standard OS variable
+ $os_keypair_name = ENV['OS_KEYPAIR_NAME']
 
  config.ssh.private_key_path = '~/.ssh/id_rsa'
  config.vm.box = 'dummy'
  config.vm.box_url = 'https://github.com/cloudbau/vagrant-openstack-plugin/raw/master/dummy.box'
 
  config.vm.provider :openstack do |os|
-      os.username = 'user'
-      os.api_key = 'pass'
-      os.tenant = 'tenant'
-      os.keypair_name = 'keypair'
+      os.username = $os_username
+      os.api_key = $os_password
+      os.tenant = $os_tenant_name
+      os.keypair_name = $os_keypair_name
       os.flavor = 'lightspeed'
       os.image = 'Ubuntu-14.04-Trusty'
       os.endpoint = 'https://keystone.dream.io/v2.0/tokens'
