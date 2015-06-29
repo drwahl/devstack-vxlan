@@ -34,12 +34,12 @@ Vagrant.configure("2") do |config|
  config.vm.provider :openstack do |os|
       os.username = 'user'
       os.api_key = 'pass'
+      os.tenant = 'tenant'
+      os.keypair_name = 'keypair'
       os.flavor = 'lightspeed'
       os.image = 'Ubuntu-14.04-Trusty'
       os.endpoint = 'https://keystone.dream.io/v2.0/tokens'
-      os.keypair_name = 'keypair'
       os.ssh_username = 'dhc-user'
-      os.tenant = 'tenant'
       os.network = 'private-network'
       os.hostname = 'devstack-vxlan'
       os.floating_ip = :auto
