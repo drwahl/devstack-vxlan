@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get install -y git
+apt-get install -y git python-setuptools
 mkdir /opt/stack
 git clone https://github.com/openstack-dev/devstack.git /opt/stack/devstack
 cd /opt/stack/devstack && git checkout stable/juno
