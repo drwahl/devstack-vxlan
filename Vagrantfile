@@ -28,9 +28,8 @@ Vagrant.configure("2") do |config|
       os.server_name = 'vagrant-devstack-vxlan'
   end
 
-  config.vm.provision "shell", inline: "apt-get install -y git"
-  config.vm.provision "shell", inline: "git clone https://github.com/openstack-dev/devstack.git"
-  config.vm.provision "shell", inline: "cp /vagrant/local.conf ./devstack/"
-  config.vm.provision "shell", inline: "chown -R " + $os_ssh_username + ":" + $os_ssh_username + " devstack"
+  config.vm.provision "shell", path: "controller_setup.sh"
+  config.vm.provision "shell", path: "controller_vxfld.sh"
+  config.vm.provision "shell", inline: "chown -R " + $os_ssh_username + ":" + $os_ssh_username + " /opt/stack"
 
 end
